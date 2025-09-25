@@ -159,7 +159,7 @@ def SpinSquareProd(A, B):
     """
     Computes the square spin-spinor product [AB]^{IJ}.
     
-    Takes two SpinSpinor objects.
+    Takes two SpinSpinors objects.
     Returns a sympy.Matrix object corresponding to the square spin-spinor product of the square spin-spinors contained in A and B.
     """
     return A[2].T * B[3]
