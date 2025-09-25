@@ -2,18 +2,21 @@
 Spinor-helicity utilities for symbolic calculations in SymPy.
 
 This module implements:
-    - Pauli four-vectors and epsilon tensors for SL(2,C) and SU(2).
-    - Conversion from spherical to Cartesian coordinates.
-    - Bi-spinor equivalent of four-momenta.
-    - Construction of helicity- and spin-spinors.
-    - Spinor and tensor products.
+    - Pauli four-vectors:                            sig, sig_bar
+    - Epsilon tensors for SL(2,C) and SU(2):         ueps, leps
+    - Conversion spherical to Cartesian coordinates: CartesianCoords(x)
+    - Conversion four-momenta to bi-spinors:         MSI(x)
+    - Helicity- and spin-spinors:                    HelicitySpinors(x), SpinSpinors(x)
+    - Helicity-spinor products:                      HelicityAngleProd(x), HelicitySquareProd(x)
+    - Spin-spinor products:                          SpinAngleProd(x), SpinSquareProd(x)
+    - Tensor product:                                TensorProd(x)
 
 Conventions:
     - Metric signature: (+, −, −, −).
-    - Four-vectors are given as [E, P, θ, φ] in spherical coordinates
+    - Four-vectors are given as [E, P, theta, phi] in spherical coordinates
       unless otherwise specified.
     - Helicity basis for spin projections
-    - HelicitySpinors(p) returns [⟨p|, |p⟩, [p|, |p]]
+    - HelicitySpinors(p) returns [<p|, |p>, [p|, |p]]
     - SpinSpinors(p) returns the analogous set of spin-spinors with upper SU(2) indices.
     
 Note:
@@ -69,7 +72,7 @@ def MSI(x):
 # Definition of helicity-spinors and products
 def HelicitySpinors(x):
     """
-    Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, θ, φ].
+    Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, theta, phi].
     Returns a python list of sympy.Matrix objects corresponding to the 4-vector's helicity-spinors [abra, aket, sbra, sket]
     """
     En, P, theta, phi = x[0], x[1], x[2], x[3]
@@ -102,7 +105,7 @@ def HelicitySquareProd(A,B):
 # Definition of spin-spinors and products
 def SpinSpinors(x):
     """
-    Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, θ, φ].
+    Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, theta, phi].
     Returns python list of sympy.Matrix objects corresponding to the 4-vector's spin-spinors [abra, aket, sbra, sket] with *upper* SU(2) indices.
     """
     En, P, theta, phi = x[0], x[1], x[2], x[3]
