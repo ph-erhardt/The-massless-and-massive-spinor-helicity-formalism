@@ -51,7 +51,7 @@ leps = Matrix([
 def CartesianCoords(p):
     """
     Takes a python list of sympy.Symbol objects corresponding to a 4-momentum in spherical coordinates [E, P, theta, phi].
-    Returns a sympy.Matrix object corresponding to the 4-momentum in cartisian coordinates.
+    Returns a sympy.Matrix object corresponding to the 4-momentum in cartesian coordinates.
     """
     En, P, theta, phi = p[0], p[1], p[2], p[3]
     return Matrix([En, P*sin(theta)*cos(phi), P*sin(theta)*sin(phi), P*cos(theta)])
