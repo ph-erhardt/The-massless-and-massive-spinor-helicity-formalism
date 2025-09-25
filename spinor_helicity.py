@@ -90,7 +90,7 @@ def TensorProd(A, B):
 def HelicitySpinors(p):
     """
     Takes a python list of sympy.Symbol objects corresponding to a 4-momentum in spherical coords [E, P, theta, phi].
-    Returns a python list of sympy.Matrix objects corresponding to the 4-momentum's helicity-spinors [abra, aket, sbra, sket]
+    Returns a python list of sympy.Matrix objects corresponding to the 4-momentum's helicity-spinors [<p|, |p>, [p|, |p]]
     """
     En, P, theta, phi = p[0], p[1], p[2], p[3]
 
@@ -123,7 +123,7 @@ def HelicitySquareProd(A,B):
 def SpinSpinors(p):
     """
     Takes a python list of sympy.Symbol objects corresponding to a 4-momentum in spherical coords [E, P, theta, phi].
-    Returns python list of sympy.Matrix objects corresponding to the 4-momentum's spin-spinors [abra, aket, sbra, sket] with *upper* SU(2) indices.
+    Returns python list of sympy.Matrix objects corresponding to the 4-momentum's spin-spinors [<p|, |p>, [p|, |p]] with *upper* SU(2) indices.
     """
     En, P, theta, phi = p[0], p[1], p[2], p[3]
 
