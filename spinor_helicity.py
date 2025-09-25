@@ -6,10 +6,10 @@ This module implements:
     - Epsilon tensors for SL(2,C) and SU(2):         ueps, leps
     - Conversion spherical to Cartesian coordinates: CartesianCoords(p)
     - Conversion four-momenta to bi-spinors:         MSI(p)
-    - Helicity- and spin-spinors:                    HelicitySpinors(p), SpinSpinors(p)
-    - Helicity-spinor products:                      HelicityAngleProd(p), HelicitySquareProd(p)
-    - Spin-spinor products:                          SpinAngleProd(p), SpinSquareProd(p)
     - Tensor product:                                TensorProd(A,B)
+    - Helicity- and spin-spinors:                    HelicitySpinors(p), SpinSpinors(p)
+    - Helicity-spinor products:                      HelicityAngleProd(A,B), HelicitySquareProd(A,B)
+    - Spin-spinor products:                          SpinAngleProd(A,B), SpinSquareProd(A,B)
 
 Conventions:
     - Metric signature: (+, −, −, −).
@@ -68,6 +68,23 @@ def MSI(p):
         [p0 - p3, -p1 + I*p2],
         [-p1 - I*p2, p0 + p3]
     ])
+
+def TensorProd(A, B):
+    """
+    Takes two sympy.Matrix objects.
+    Returns a sympy.tensor.MutableDenseNDimArray object corresponding to the tensor product of A and B
+    """
+    m, n = A.shape
+    p, q = B.shape
+    result = tensor.array.MutableDenseNDimArray.zeros(m, n, p, q)
+
+    for i in range(m):
+        for j in range(n):
+            for k in range(p):
+                for l in range(q):
+                    result[i, j, k, l] = A[i, j] * B[k, l]
+
+    return result
 
 # Definition of helicity-spinors and products
 def HelicitySpinors(p):
@@ -146,20 +163,3 @@ def SpinSquareProd(A, B):
     Returns a sympy.Matrix object corresponding to the square spin-spinor product of the square spin-spinors contained in A and B.
     """
     return A[2].T * B[3]
-
-def TensorProd(A, B):
-    """
-    Takes two sympy.Matrix objects.
-    Returns a sympy.tensor.MutableDenseNDimArray object corresponding to the tensor product of A and B
-    """
-    m, n = A.shape
-    p, q = B.shape
-    result = tensor.array.MutableDenseNDimArray.zeros(m, n, p, q)
-
-    for i in range(m):
-        for j in range(n):
-            for k in range(p):
-                for l in range(q):
-                    result[i, j, k, l] = A[i, j] * B[k, l]
-
-    return result
