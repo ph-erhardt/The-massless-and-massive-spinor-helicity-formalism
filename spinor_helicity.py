@@ -32,8 +32,8 @@ from sympy.physics.matrices import msigma
 from sympy import tensor
 
 # Pauli 4-vectors
-sig = [eye(2), -msigma(1), -msigma(2), -msigma(3)]
-sig_bar = [eye(2), msigma(1), msigma(2), msigma(3)]
+sig = [eye(2), msigma(1), msigma(2), msigma(3)]
+sig_bar = [eye(2), -msigma(1), -msigma(2), -msigma(3)]
 
 # Antisymmetric 2x2 matrix with upper SL(2,C)/ little-group indices, eps^{ab}
 ueps = Matrix([
