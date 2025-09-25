@@ -13,7 +13,7 @@ This module implements:
 
 Conventions:
     - Metric signature: (+, −, −, −).
-    - Four-vectors are given as [E, P, theta, phi] in spherical coordinates
+    - Four-momentuma are given as [E, P, theta, phi] in spherical coordinates
       unless otherwise specified.
     - Helicity basis for spin projections
     - HelicitySpinors(p) returns [<p|, |p>, [p|, |p]]
@@ -60,8 +60,8 @@ def MSI(p):
     """
     Minkowski Space Isomorphism R^4 -> C^{2x2}. 
     
-    Takes a python list corresponding to 4-vector in cartesian coordinates.
-    Returns sympy.Matrix corresponding to the 4-vector's bi-spinor.
+    Takes a python list corresponding to 4-momentum in cartesian coordinates.
+    Returns sympy.Matrix corresponding to the 4-momentum's bi-spinor.
     """
     p0, p1, p2, p3 = p[0], p[1], p[2], p[3]
     return Matrix([
@@ -89,8 +89,8 @@ def TensorProd(A, B):
 # Definition of helicity-spinors and products
 def HelicitySpinors(p):
     """
-    Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, theta, phi].
-    Returns a python list of sympy.Matrix objects corresponding to the 4-vector's helicity-spinors [abra, aket, sbra, sket]
+    Takes a python list of sympy.Symbol objects corresponding to a 4-momentum in spherical coords [E, P, theta, phi].
+    Returns a python list of sympy.Matrix objects corresponding to the 4-momentum's helicity-spinors [abra, aket, sbra, sket]
     """
     En, P, theta, phi = p[0], p[1], p[2], p[3]
 
@@ -122,8 +122,8 @@ def HelicitySquareProd(A,B):
 # Definition of spin-spinors and products
 def SpinSpinors(p):
     """
-    Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, theta, phi].
-    Returns python list of sympy.Matrix objects corresponding to the 4-vector's spin-spinors [abra, aket, sbra, sket] with *upper* SU(2) indices.
+    Takes a python list of sympy.Symbol objects corresponding to a 4-momentum in spherical coords [E, P, theta, phi].
+    Returns python list of sympy.Matrix objects corresponding to the 4-momentum's spin-spinors [abra, aket, sbra, sket] with *upper* SU(2) indices.
     """
     En, P, theta, phi = p[0], p[1], p[2], p[3]
 
