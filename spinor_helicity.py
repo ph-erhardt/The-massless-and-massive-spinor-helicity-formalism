@@ -4,12 +4,12 @@ Spinor-helicity utilities for symbolic calculations in SymPy.
 This module implements:
     - Pauli four-vectors:                            sig, sig_bar
     - Epsilon tensors for SL(2,C) and SU(2):         ueps, leps
-    - Conversion spherical to Cartesian coordinates: CartesianCoords(x)
-    - Conversion four-momenta to bi-spinors:         MSI(x)
-    - Helicity- and spin-spinors:                    HelicitySpinors(x), SpinSpinors(x)
-    - Helicity-spinor products:                      HelicityAngleProd(x), HelicitySquareProd(x)
-    - Spin-spinor products:                          SpinAngleProd(x), SpinSquareProd(x)
-    - Tensor product:                                TensorProd(x)
+    - Conversion spherical to Cartesian coordinates: CartesianCoords(p)
+    - Conversion four-momenta to bi-spinors:         MSI(p)
+    - Helicity- and spin-spinors:                    HelicitySpinors(p), SpinSpinors(p)
+    - Helicity-spinor products:                      HelicityAngleProd(p), HelicitySquareProd(p)
+    - Spin-spinor products:                          SpinAngleProd(p), SpinSquareProd(p)
+    - Tensor product:                                TensorProd(A,B)
 
 Conventions:
     - Metric signature: (+, −, −, −).
@@ -48,34 +48,34 @@ leps = Matrix([
 ])
 
 # Useful functions
-def CartesianCoords(x):
+def CartesianCoords(p):
     """
-    Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coordinates [E, P, θ, φ].
-    Returns a sympy.Matrix object corresponding to the 4-vector in cartisian coordinates.
+    Takes a python list of sympy.Symbol objects corresponding to a 4-momentum in spherical coordinates [E, P, θ, φ].
+    Returns a sympy.Matrix object corresponding to the 4-momentum in cartisian coordinates.
     """
-    En, P, theta, phi = x[0], x[1], x[2], x[3]
+    En, P, theta, phi = p[0], p[1], p[2], p[3]
     return Matrix([En, P*sin(theta)*cos(phi), P*sin(theta)*sin(phi), P*cos(theta)])
 
-def MSI(x):
+def MSI(p):
     """
     Minkowski Space Isomorphism R^4 -> C^{2x2}. 
     
     Takes a python list corresponding to 4-vector in cartesian coordinates.
     Returns sympy.Matrix corresponding to the 4-vector's bi-spinor.
     """
-    p0, p1, p2, p3 = x[0], x[1], x[2], x[3]
+    p0, p1, p2, p3 = p[0], p[1], p[2], p[3]
     return Matrix([
         [p0 - p3, -p1 + I*p2],
         [-p1 - I*p2, p0 + p3]
     ])
 
 # Definition of helicity-spinors and products
-def HelicitySpinors(x):
+def HelicitySpinors(p):
     """
     Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, theta, phi].
     Returns a python list of sympy.Matrix objects corresponding to the 4-vector's helicity-spinors [abra, aket, sbra, sket]
     """
-    En, P, theta, phi = x[0], x[1], x[2], x[3]
+    En, P, theta, phi = p[0], p[1], p[2], p[3]
 
     abra = sqrt(2*En) * Matrix([cos(theta/2), sin(theta/2)*exp(-I*phi)])
     aket = sqrt(2*En) * Matrix([-sin(theta/2)*exp(-I*phi), cos(theta/2)])
@@ -103,12 +103,12 @@ def HelicitySquareProd(A,B):
     return A[2].T * B[3]
 
 # Definition of spin-spinors and products
-def SpinSpinors(x):
+def SpinSpinors(p):
     """
     Takes a python list of sympy.Symbol objects corresponding to a 4-vector in spherical coords [E, P, theta, phi].
     Returns python list of sympy.Matrix objects corresponding to the 4-vector's spin-spinors [abra, aket, sbra, sket] with *upper* SU(2) indices.
     """
-    En, P, theta, phi = x[0], x[1], x[2], x[3]
+    En, P, theta, phi = p[0], p[1], p[2], p[3]
 
     abra = Matrix([
         [sqrt(En - P)*exp(I*phi)*sin(theta/2), sqrt(En + P)*cos(theta/2)], 
